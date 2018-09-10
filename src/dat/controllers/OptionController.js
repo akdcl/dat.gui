@@ -42,13 +42,18 @@ class OptionController extends Controller {
 
     if (common.isArray(options)) {
       const map = {};
-      common.each(options, function(element) {
-        map[element] = element;
+      common.each(options, function (element) {
+        if (typeof element === "object" && "label" in element && "value" in element) { // Modify add label and value.
+          map[element["label"]] = element["value"];
+        }
+        else {
+          map[element] = element;
+        }
       });
       options = map;
     }
 
-    common.each(options, function(value, key) {
+    common.each(options, function (value, key) {
       const opt = document.createElement('option');
       opt.innerHTML = key;
       opt.setAttribute('value', value);
@@ -58,7 +63,7 @@ class OptionController extends Controller {
     // Acknowledge original value
     this.updateDisplay();
 
-    dom.bind(this.__select, 'change', function() {
+    dom.bind(this.__select, 'change', function () {
       const desiredValue = this.options[this.selectedIndex].value;
       _this.setValue(desiredValue);
     });
