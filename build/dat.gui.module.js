@@ -1124,6 +1124,7 @@ var NumberControllerBox = function (_NumberController) {
     _this2.__truncationSuspended = false;
     var _this = _this2;
     var prevY = void 0;
+    _this2._mouseDown = false;
     function onChange() {
       var attempted = parseFloat(_this.__input.value);
       if (!Common.isNaN(attempted)) {
@@ -1144,11 +1145,13 @@ var NumberControllerBox = function (_NumberController) {
       prevY = e.clientY;
     }
     function onMouseUp() {
+      _this._mouseDown = false;
       dom.unbind(window, 'mousemove', onMouseDrag);
       dom.unbind(window, 'mouseup', onMouseUp);
       onFinish();
     }
     function onMouseDown(e) {
+      _this._mouseDown = true;
       dom.bind(window, 'mousemove', onMouseDrag);
       dom.bind(window, 'mouseup', onMouseUp);
       prevY = e.clientY;
@@ -1173,7 +1176,9 @@ var NumberControllerBox = function (_NumberController) {
   createClass(NumberControllerBox, [{
     key: 'updateDisplay',
     value: function updateDisplay() {
-      this.__input.value = this.__truncationSuspended ? this.getValue() : roundToDecimal(this.getValue(), this.__precision);
+      if (document.activeElement !== this.__input || this._mouseDown) {
+        this.__input.value = this.__truncationSuspended ? this.getValue() : roundToDecimal(this.getValue(), this.__precision);
+      }
       return get(NumberControllerBox.prototype.__proto__ || Object.getPrototypeOf(NumberControllerBox.prototype), 'updateDisplay', this).call(this);
     }
   }]);
