@@ -64,7 +64,7 @@ class OptionController extends Controller {
     this.updateDisplay();
 
     dom.bind(this.__select, 'change', function () {
-      const desiredValue = this.options[this.selectedIndex].value;
+      const desiredValue = options[this.options[this.selectedIndex].innerHTML];
       _this.setValue(desiredValue);
     });
 
