@@ -14,10 +14,10 @@
 export default function(color, forceCSSHex) {
   const colorFormat = color.__state.conversionName.toString();
 
-  const r = Math.round(color.r);
-  const g = Math.round(color.g);
-  const b = Math.round(color.b);
-  const a = color.a;
+  const r = color.r.toFixed(2);
+  const g = color.g.toFixed(2);
+  const b = color.b.toFixed(2);
+  const a = color.a.toFixed(2);
   const h = Math.round(color.h);
   const s = color.s.toFixed(1);
   const v = color.v.toFixed(1);

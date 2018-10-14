@@ -69,7 +69,7 @@ class NumberController extends Controller {
     }
 
     if (this.__step !== undefined && _v % this.__step !== 0) {
-      _v = Math.round(_v / this.__step) * this.__step;
+      // _v = Math.round(_v / this.__step) * this.__step;
     }
 
     return super.setValue(_v);
@@ -112,7 +112,8 @@ class NumberController extends Controller {
   step(stepValue) {
     this.__step = stepValue;
     this.__impliedStep = stepValue;
-    this.__precision = numDecimals(stepValue);
+    // this.__precision = numDecimals(stepValue);
+    this.__precision = 2;
     return this;
   }
 }

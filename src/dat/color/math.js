@@ -32,13 +32,17 @@ const ColorMath = {
     ][hi];
 
     return {
-      r: c[0] * 255,
-      g: c[1] * 255,
-      b: c[2] * 255
+      r: c[0],
+      g: c[1],
+      b: c[2]
     };
   },
 
   rgb_to_hsv: function(r, g, b) {
+    r = Math.round(r * 255);
+    g = Math.round(g * 255);
+    b = Math.round(b * 255);
+
     const min = Math.min(r, g, b);
     const max = Math.max(r, g, b);
     const delta = max - min;
@@ -75,6 +79,9 @@ const ColorMath = {
   },
 
   rgb_to_hex: function(r, g, b) {
+    r = Math.round(r * 255);
+    g = Math.round(g * 255);
+    b = Math.round(b * 255);
     let hex = this.hex_with_component(0, 2, r);
     hex = this.hex_with_component(hex, 1, g);
     hex = this.hex_with_component(hex, 0, b);
