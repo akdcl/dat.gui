@@ -293,7 +293,7 @@ const GUI = function (pars) {
           // the bat.
           this.onResize();
 
-          if (_this.__closeButton) {
+          if (_this.__closeButton && !this.name) {
             _this.__closeButton.innerHTML = v ? GUI.TEXT_OPEN : GUI.TEXT_CLOSED;
           }
         }
@@ -374,7 +374,7 @@ const GUI = function (pars) {
     }
 
     this.__closeButton = document.createElement('div');
-    this.__closeButton.innerHTML = GUI.TEXT_CLOSED;
+    this.__closeButton.innerHTML = this.label || GUI.TEXT_CLOSED;
     dom.addClass(this.__closeButton, GUI.CLASS_CLOSE_BUTTON);
     if (params.closeOnTop) {
       dom.addClass(this.__closeButton, GUI.CLASS_CLOSE_TOP);
@@ -386,6 +386,9 @@ const GUI = function (pars) {
 
     dom.bind(this.__closeButton, 'click', function () {
       _this.closed = !_this.closed;
+      if (_this.onClick) {
+        _this.onClick(_this);
+      }
     });
     // Oh, you're a nested GUI!
   } else {

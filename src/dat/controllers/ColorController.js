@@ -139,12 +139,11 @@ class ColorController extends Controller {
     common.extend(this.__input.style, {
       outline: 'none',
 //      width: '120px',
-      textAlign: 'center',
+      textAlign: 'left',
 //      padding: '4px',
 //      marginBottom: '6px',
       color: '#fff',
       border: 0,
-      fontWeight: 'bold',
       textShadow: this.__input_textShadow + 'rgba(0,0,0,0.7)'
     });
 
